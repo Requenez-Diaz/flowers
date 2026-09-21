@@ -25,3 +25,39 @@ function createPetal() {
 for (let i = 0; i < PETAL_COUNT; i++) {
   createPetal();
 }
+
+const messages = document.querySelectorAll(".message");
+const dots = document.getElementById("dots");
+let current = 0;
+let timer;
+
+messages.forEach((_, i) => {
+  const dot = document.createElement("div");
+  dot.className = "dot" + (i === 0 ? " active" : "");
+  dot.addEventListener("click", () => {
+    showPhrase(i);
+    restartTimer();
+  });
+  dots.appendChild(dot);
+});
+
+const dotEls = document.querySelectorAll(".dot");
+
+function showPhrase(index) {
+  messages[current].classList.remove("active");
+  dotEls[current].classList.remove("active");
+  current = index;
+  messages[current].classList.add("active");
+  dotEls[current].classList.add("active");
+}
+
+function nextPhrase() {
+  showPhrase((current + 1) % messages.length);
+}
+
+function restartTimer() {
+  clearInterval(timer);
+  timer = setInterval(nextPhrase, 4000);
+}
+
+restartTimer();
