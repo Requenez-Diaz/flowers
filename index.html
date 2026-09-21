@@ -1,108 +1,126 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Para ti 💛</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div id="petals"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Para ti 💛</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="sun"></div>
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
 
-  <main class="scene">
-    <div class="flower flower-1">
-      <div class="stem"></div>
-      <div class="leaf leaf-left"></div>
-      <div class="leaf leaf-right"></div>
-      <div class="head">
-        <div class="petal p1"></div>
-        <div class="petal p2"></div>
-        <div class="petal p3"></div>
-        <div class="petal p4"></div>
-        <div class="petal p5"></div>
-        <div class="petal p6"></div>
-        <div class="petal p7"></div>
-        <div class="petal p8"></div>
-        <div class="core"></div>
-      </div>
-    </div>
+    <div id="bokeh"></div>
+    <div id="sparkles"></div>
+    <div id="petals"></div>
 
-    <div class="flower flower-2">
-      <div class="stem"></div>
-      <div class="leaf leaf-left"></div>
-      <div class="leaf leaf-right"></div>
-      <div class="head">
-        <div class="petal p1"></div>
-        <div class="petal p2"></div>
-        <div class="petal p3"></div>
-        <div class="petal p4"></div>
-        <div class="petal p5"></div>
-        <div class="petal p6"></div>
-        <div class="petal p7"></div>
-        <div class="petal p8"></div>
-        <div class="core"></div>
-      </div>
-    </div>
-
-    <div class="flower flower-3">
-      <div class="stem"></div>
-      <div class="leaf leaf-left"></div>
-      <div class="leaf leaf-right"></div>
-      <div class="head">
-        <div class="petal p1"></div>
-        <div class="petal p2"></div>
-        <div class="petal p3"></div>
-        <div class="petal p4"></div>
-        <div class="petal p5"></div>
-        <div class="petal p6"></div>
-        <div class="petal p7"></div>
-        <div class="petal p8"></div>
-        <div class="core"></div>
-      </div>
-    </div>
-
-    <div class="card" id="card">
-      <div class="card-front">
-        <span class="heart">💛</span>
-        <p class="card-hint">Haz clic para abrir</p>
-      </div>
-      <div class="card-inside">
-        <h1 class="title">Para tí</h1>
-        <div class="phrases">
-          <p class="message active" data-phrase="1">
-            "Detrás de cada flor amarilla hay un rayo de sol."
-          </p>
-          <p class="message" data-phrase="2">
-            "Siempre hay una razón para sonreír: <strong>tú</strong>."
-          </p>
-          <p class="message" data-phrase="3">
-            "Cada vez que veas un girasol, recuerda que eres luz."
-          </p>
-          <p class="message" data-phrase="4">
-            "Tu valentía florece donde otros no se atreven a crecer."
-          </p>
-          <p class="message" data-phrase="5">
-            "El mundo es más bonito porque tú estás en él."
-          </p>
-          <p class="message" data-phrase="6">
-            "No dejes que nadie opaque tu brillo dorado."
-          </p>
-          <p class="message" data-phrase="7">
-            "Eres capaz de lo que te propongas, siempre."
-          </p>
-          <p class="message" data-phrase="8">
-            "En los días grises, recuerda: tú eres mi sol."
-          </p>
-          <p class="message" data-phrase="9">
-            "Nunca olvides lo increíble que eres."
-          </p>
+    <main class="scene">
+      <div class="flower flower-1" data-index="0">
+        <div class="stem"></div>
+        <div class="leaf leaf-left"></div>
+        <div class="leaf leaf-right"></div>
+        <div class="head" title="Tócame 🌻">
+          <div class="petal p1"></div>
+          <div class="petal p2"></div>
+          <div class="petal p3"></div>
+          <div class="petal p4"></div>
+          <div class="petal p5"></div>
+          <div class="petal p6"></div>
+          <div class="petal p7"></div>
+          <div class="petal p8"></div>
+          <div class="core"></div>
         </div>
-        <div class="dots" id="dots"></div>
-        <p class="signature">Con muchísimo cariño 💛</p>
       </div>
-    </div>
-  </main>
 
-  <script src="item.js"></script>
-</body>
+      <div class="flower flower-2" data-index="1">
+        <div class="stem"></div>
+        <div class="leaf leaf-left"></div>
+        <div class="leaf leaf-right"></div>
+        <div class="head" title="Tócame 🌻">
+          <div class="petal p1"></div>
+          <div class="petal p2"></div>
+          <div class="petal p3"></div>
+          <div class="petal p4"></div>
+          <div class="petal p5"></div>
+          <div class="petal p6"></div>
+          <div class="petal p7"></div>
+          <div class="petal p8"></div>
+          <div class="core"></div>
+        </div>
+      </div>
+
+      <div class="flower flower-3" data-index="2">
+        <div class="stem"></div>
+        <div class="leaf leaf-left"></div>
+        <div class="leaf leaf-right"></div>
+        <div class="head" title="Tócame 🌻">
+          <div class="petal p1"></div>
+          <div class="petal p2"></div>
+          <div class="petal p3"></div>
+          <div class="petal p4"></div>
+          <div class="petal p5"></div>
+          <div class="petal p6"></div>
+          <div class="petal p7"></div>
+          <div class="petal p8"></div>
+          <div class="core"></div>
+        </div>
+      </div>
+
+      <div class="card" id="card">
+        <div class="ribbon ribbon-top"></div>
+        <div class="card-front">
+          <span class="heart">💛</span>
+          <p class="card-hint">Toca el corazón para abrir ✨</p>
+        </div>
+        <div class="card-inside">
+          <span class="star-burst" id="starBurst"></span>
+          <h1 class="title">Para tí</h1>
+          <div class="phrases">
+            <p class="message active" data-phrase="1">
+              "Detrás de cada flor amarilla hay un rayo de sol."
+            </p>
+            <p class="message" data-phrase="2">
+              "Siempre hay una razón para sonreír: <strong>tú</strong>."
+            </p>
+            <p class="message" data-phrase="3">
+              "Cada vez que veas un girasol, recuerda que eres luz."
+            </p>
+            <p class="message" data-phrase="4">
+              "Tu valentía florece donde otros no se atreven a crecer."
+            </p>
+            <p class="message" data-phrase="5">
+              "El mundo es más bonito porque tú estás en él."
+            </p>
+            <p class="message" data-phrase="6">
+              "No dejes que nadie opaque tu brillo dorado."
+            </p>
+            <p class="message" data-phrase="7">
+              "Eres capaz de todo lo que te propongas."
+            </p>
+            <p class="message" data-phrase="9">
+              "Nunca olvides lo increíblemente especial que eres."
+            </p>
+            <p class="message" data-phrase="10">
+              "No importa lo que pase, <strong>siempre estaré para ti</strong>."
+            </p>
+            <p class="message" data-phrase="11">
+              "En cada girasol que veas, recuerda que tienes a alguien que te
+              acompaña siempre."
+            </p>
+          </div>
+          <div class="dots" id="dots"></div>
+          <p class="signature">Con muchísimo cariño, para usted damita 💛</p>
+        </div>
+      </div>
+    </main>
+
+    <script src="item.js"></script>
+  </body>
 </html>
