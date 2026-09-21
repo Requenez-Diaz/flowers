@@ -2,6 +2,12 @@ const card = document.getElementById("card");
 const petalsContainer = document.getElementById("petals");
 const sparklesContainer = document.getElementById("sparkles");
 const bokehContainer = document.getElementById("bokeh");
+const scene = document.getElementById("scene");
+const intro = document.getElementById("intro");
+const surpriseBtn = document.getElementById("surpriseBtn");
+const finale = document.getElementById("finale");
+
+const name = "Wizleyling";
 
 /* ---------- Frases ---------- */
 const messages = document.querySelectorAll(".message");
@@ -40,32 +46,50 @@ function restartTimer() {
 
 restartTimer();
 
+/* ---------- Intro / regalo ---------- */
+document.getElementById("openBtn").addEventListener("click", () => {
+  intro.classList.add("hidden");
+  scene.classList.add("show");
+  confettiBurst(window.innerWidth / 2, window.innerHeight / 2);
+  spawnHearts(12);
+  setTimeout(() => {
+    resolveCardPosition();
+  }, 50);
+});
+
 /* ---------- Tarjeta ---------- */
+let resolveCardPosition = () => {};
 let cardOpened = false;
 
 card.addEventListener("click", () => {
-  if (!cardOpened) {
-    cardOpened = true;
-    card.classList.add("open");
-    confettiBurst();
-    spawnHearts(10);
-    restartTimer();
-  }
+  if (cardOpened) return;
+  cardOpened = true;
+  card.classList.add("open");
+  burst(card.left + card.width / 2, card.top + 30, 24);
+  spawnHearts(10);
+  restartTimer();
 });
 
-/* ---------- Estallido de confeti ---------- */
-function confettiBurst() {
+/* La tarjeta se usa igual para el estallido */
+resolveCardPosition = () => {
   const rect = card.getBoundingClientRect();
-  const cx = rect.left + rect.width / 2;
-  const cy = rect.top + rect.height / 2;
+  card.left = rect.left;
+  card.top = rect.top;
+  card.width = rect.width;
+};
+
+window.addEventListener("resize", resolveCardPosition);
+
+/* ---------- Estallido de confeti ---------- */
+function confettiBurst(cx, cy) {
   const colors = ["#ffd93d", "#ffb400", "#ff9500", "#7cb342", "#fff089"];
-  const count = 60;
+  const count = 70;
 
   for (let i = 0; i < count; i++) {
     const el = document.createElement("div");
     const size = 6 + Math.random() * 10;
     el.style.cssText =
-      "position:fixed;z-index:40;pointer-events:none;" +
+      "position:fixed;z-index:80;pointer-events:none;" +
       "left:" + cx + "px;top:" + cy + "px;" +
       "width:" + size + "px;height:" + size + "px;" +
       "background:" + colors[i % colors.length] + ";border-radius:" +
@@ -73,9 +97,9 @@ function confettiBurst() {
     document.body.appendChild(el);
 
     const angle = Math.random() * Math.PI * 2;
-    const dist = 100 + Math.random() * 320;
+    const dist = 90 + Math.random() * 300;
     const tx = Math.cos(angle) * dist;
-    const ty = Math.sin(angle) * dist - 140;
+    const ty = Math.sin(angle) * dist - 160;
 
     el.animate(
       [
@@ -99,9 +123,7 @@ document.querySelectorAll(".flower").forEach((flower) => {
     setTimeout(() => flower.classList.remove("boost"), 500);
 
     const rect = flower.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + 12;
-    burst(cx, cy, 18);
+    burst(rect.left + rect.width / 2, rect.top + 12, 18);
     spawnHearts(4);
   });
 });
@@ -129,10 +151,10 @@ function burst(x, y, count) {
   }
 }
 
-/* ---------- Destellos que siguen el cursor ---------- */
+/* ---------- Destellos del cursor ---------- */
 let lastSparkle = 0;
 
-document.addEventListener("mousemove", (e) => {
+document.addEventListener("pointermove", (e) => {
   const now = Date.now();
   if (now - lastSparkle < 40) return;
   lastSparkle = now;
@@ -168,13 +190,10 @@ setInterval(() => {
   if (Math.random() > 0.45) spawnHearts(1);
 }, 1600);
 
-/* ---------- Pétalos cayendo continuamente ---------- */
-const PETAL_COUNT = 26;
-
-function createPetal() {
+/* ---------- Pétalos cayendo ---------- */
+for (let i = 0; i < 26; i++) {
   const petal = document.createElement("div");
   petal.className = "falling-petal";
-
   const size = 8 + Math.random() * 10;
   petal.style.width = size + "px";
   petal.style.height = size * 1.5 + "px";
@@ -182,15 +201,10 @@ function createPetal() {
   petal.style.animationDuration = 5 + Math.random() * 7 + "s";
   petal.style.animationDelay = -Math.random() * 12 + "s";
   petal.style.opacity = 0.6 + Math.random() * 0.4;
-
   petalsContainer.appendChild(petal);
 }
 
-for (let i = 0; i < PETAL_COUNT; i++) {
-  createPetal();
-}
-
-/* ---------- Bokeh de fondo ---------- */
+/* ---------- Bokeh ---------- */
 for (let i = 0; i < 16; i++) {
   const d = document.createElement("div");
   d.className = "bokeh-dot";
@@ -203,3 +217,72 @@ for (let i = 0; i < 16; i++) {
   d.style.animationDelay = -Math.random() * 6 + "s";
   bokehContainer.appendChild(d);
 }
+
+/* =========================================================
+   FINALE: el nombre escrito en estrellas del cielo nocturno
+   ========================================================= */
+function showFinale() {
+  document.getElementById("card").style.opacity = "0";
+  document.querySelector(".surprise-btn").style.display = "none";
+  finale.classList.add("show");
+
+  createSkyStars(90);
+  spawnShootingStars();
+  buildFinaleName();
+  confettiBurst(window.innerWidth / 2, window.innerHeight * 0.35);
+  spawnHearts(14);
+}
+
+function createSkyStars(count) {
+  for (let i = 0; i < count; i++) {
+    const s = document.createElement("div");
+    s.className = "sky-star";
+    const size = 1 + Math.random() * 3;
+    s.style.width = size + "px";
+    s.style.height = size + "px";
+    s.style.left = Math.random() * 100 + "vw";
+    s.style.top = Math.random() * 100 + "vh";
+    s.style.animationDuration = 1.5 + Math.random() * 3 + "s";
+    s.style.animationDelay = -Math.random() * 3 + "s";
+    finale.appendChild(s);
+  }
+}
+
+function spawnShootingStars() {
+  const shootIt = () => {
+    const star = document.createElement("div");
+    star.className = "shooting";
+    star.style.top = 5 + Math.random() * 30 + "vh";
+    star.style.animationDuration = 1.6 + Math.random() * 1.4 + "s";
+    finale.appendChild(star);
+    star.addEventListener("animationend", () => star.remove());
+    const wait = 1800 + Math.random() * 4000;
+    shootTimer = setTimeout(shootIt, wait);
+  };
+  let shootTimer = setTimeout(shootIt, 900);
+  window.addEventListener("beforeunload", () => clearTimeout(shootTimer));
+}
+
+function buildFinaleName() {
+  const nameEl = document.getElementById("finaleName");
+  nameEl.innerHTML = "";
+  const letters = name.split("");
+  letters.forEach((letter, i) => {
+    const span = document.createElement("span");
+    span.className = "finale-name-letter";
+    span.style.animationDelay = (0.4 + i * 0.22) + "s";
+    span.textContent = letter;
+    nameEl.appendChild(span);
+  });
+
+  const totalDelay = 400 + letters.length * 220 + 500;
+  setTimeout(() => {
+    document.querySelectorAll(".finale-name-letter").forEach((span, i) => {
+      span.classList.add("twinkle");
+      span.style.animationDelay = (i * 80) % 700 + "ms";
+      span.style.animationDuration = 1.7 + (i % 3) * 0.5 + "s";
+    });
+  }, totalDelay);
+}
+
+surpriseBtn.addEventListener("click", showFinale);

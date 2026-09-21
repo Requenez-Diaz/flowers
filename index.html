@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Para ti 💛</title>
+    <title>Un regalo para ti 💛</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,15 +13,25 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- Intro tipo regalo -->
+    <div id="intro">
+      <div class="intro-box">
+        <div class="intro-heart">💛</div>
+        <p class="intro-title">Hay algo especial para ti</p>
+        <p class="intro-sub">Algo hecho con mucho corazón…</p>
+        <button id="openBtn" class="open-btn">Toca para descubrir ✨</button>
+      </div>
+    </div>
+
+    <!-- Fondo -->
     <div class="sun"></div>
     <div class="cloud cloud-1"></div>
     <div class="cloud cloud-2"></div>
-
     <div id="bokeh"></div>
     <div id="sparkles"></div>
     <div id="petals"></div>
 
-    <main class="scene">
+    <main class="scene" id="scene">
       <div class="flower flower-1" data-index="0">
         <div class="stem"></div>
         <div class="leaf leaf-left"></div>
@@ -80,7 +90,6 @@
           <p class="card-hint">Toca el corazón para abrir ✨</p>
         </div>
         <div class="card-inside">
-          <span class="star-burst" id="starBurst"></span>
           <h1 class="title">Para tí</h1>
           <div class="phrases">
             <p class="message active" data-phrase="1">
@@ -104,6 +113,9 @@
             <p class="message" data-phrase="7">
               "Eres capaz de todo lo que te propongas."
             </p>
+            <p class="message" data-phrase="8">
+              "En los días grises, recuerda: tú eres mi sol."
+            </p>
             <p class="message" data-phrase="9">
               "Nunca olvides lo increíblemente especial que eres."
             </p>
@@ -116,10 +128,31 @@
             </p>
           </div>
           <div class="dots" id="dots"></div>
-          <p class="signature">Con muchísimo cariño, para usted damita 💛</p>
+          <p class="signature">Con muchísimo cariño, para ti 💛</p>
         </div>
       </div>
+
+      <!-- Botón de la sorpresa -->
+      <button id="surpriseBtn" class="surprise-btn">
+        <span class="s-star">🌟</span>
+        <span class="s-text">Toca tu sorpresa</span>
+      </button>
     </main>
+
+    <!-- Finale -->
+    <div id="finale">
+      <div class="finale-sky">
+        <div class="finale-title">Tu sorpresa</div>
+        <h2 id="finaleName"></h2>
+        <p class="finale-msg">
+          Este rincón dorado fue hecho <strong>solo para ti</strong>. Cada
+          pétalo, cada estrella y cada palabra llevan mi cariño. Nunca olvides
+          que eres <strong>única</strong>, y que siempre tendrás a alguien aquí
+          para ti. 💛
+        </p>
+        <p class="finale-end">Con todo cariño 💛</p>
+      </div>
+    </div>
 
     <script src="item.js"></script>
   </body>
